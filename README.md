@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+The ability to access functions/variables from a parent level scope in child level scope even after the parent has been terminated
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+  The closure is used in the console.log. You can tell because the inner functin is using a variable passed through the parent parameter
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+  the Name 'Dan' called in both functions will always remain the same. The random number generated will change each time the function is called.
 c. What is the lexical scope of `newRoll`? 
+  new roll's lexical scope encompases the begining of the return statement to line 54 which is why a return is not needed within the function newRoll is in.
 
 ### Task 2c - Exit Ticket
 
