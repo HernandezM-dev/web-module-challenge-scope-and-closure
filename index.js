@@ -27,11 +27,12 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
- * 
+ *    Counter 1 is a nested funtion counter 2 is not.
  * 2. Which of the two uses a closure? How can you tell?
- * 
+ *    counter 1 uses a closure because its in a nested function. It require the variable from its parent.
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *    Counter 1 would be preferalbe if you want to pass in a parameter and keeps sepereate scores based off of that parameter   
+ *    Counter 2 would be preferable if you want to keep count as a global variable and accesible by other functions.
 */
 
 // counter1 code
@@ -56,11 +57,13 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
-
+     return Math.floor(Math.random() * 3); //round down random number generated between 1-2
+    
 }
+console.log('Task 2')
+console.log(inning())// console logs answer for testing
 
 /* Task 3: finalScore()
 
@@ -76,12 +79,22 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(inning, numberOfInnings){
+  function addInning(inning, numberOfInnings){
+    let score = 0
+    for(i=0;i<numberOfInnings;i++){
+      score += inning();
+      // console.log(`pass ${i}:${score}`);
+    }
+    return score;
+  }
+  return {
+    Home: addInning(inning, numberOfInnings),
+    Away: addInning(inning, numberOfInnings)
+  }
 }
-
+console.log('Task 3');
+console.log(finalScore(inning, 9));
 /* Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
@@ -103,8 +116,38 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(inning, numberOfInnings){
+  function addInning(inning, numberOfInnings){
+    let pointsPerInning = [];
+    for(i=0;i<=numberOfInnings;i++){
+      pointsPerInning.push(inning());
+      // console.log(`pass ${i}:${score}`);
+    }
+    return pointsPerInning;
+  }
+
+  let home = addInning(inning, numberOfInnings);
+  let away = addInning(inning, numberOfInnings);
+
+ function createScoreBoard(home, away){
+    obj = {}
+    for(i = 0; i <= home.length-1; i++){
+      if(i === 0){
+        obj['1st inning'] = `${home[i]} - ${away[i]}`;
+      }else if(i === 1){
+        obj['2nd inning'] = `${home[i]} - ${away[i]}`;
+      }else if(i === 2){
+        obj['3rd inning'] = `${home[i]} - ${away[i]}`;
+      }else if(i > 2){
+        obj[`${i}th inning`] = `${home[i]} - ${away[i]}`;
+      }
+    }
+     obj['Final Score'] = `${home.reduce((a,b) => a+b)} - ${away.reduce((a,b) => a+b)}`;
+     return obj;
+  }
+  return createScoreBoard(home, away);
 }
 
+console.log('Task 4');
+console.log(scoreboard(inning, 9));
 
